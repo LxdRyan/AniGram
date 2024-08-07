@@ -1,4 +1,4 @@
-import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
+import { Container, Image, Nav, Navbar } from "react-bootstrap";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";

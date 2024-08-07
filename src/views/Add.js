@@ -50,7 +50,6 @@ const Add = () => {
       return navigate("/login");
     }
     getImage();
-    console.log(user);
   }, [getImage, loading, navigate, user]);
 
   return (
