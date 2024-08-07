@@ -23,12 +23,12 @@ const Search = () => {
       .join("+");
   };
 
-  const searchTags = async ({ tags, page }) => {
-    const url = `${API}${POSTS}${TAGS}${tags}${LIMIT}${PAGE}${page}`;
+  const getImages = async ({ tags, page }) => {
+    const url = `${API}${POSTS}?${tags}${LIMIT}&${PAGE}${page}`;
     console.log(url);
     const response = await axios.get(url);
     setImages(response.data);
-    response.data.forEach((image) => console.log(image.tag_string));
+    // response.data.forEach((image) => console.log(image));
   };
 
   const ImageSquare = ({ image }) => {
@@ -91,8 +91,12 @@ const Search = () => {
         <Button
           variant="primary"
           onClick={() => {
-            setTags(convertSearch(search));
-            searchTags({ tags, page });
+            if (search) {
+              setTags(`${TAGS}${convertSearch(search)}&`);
+            } else {
+              setTags("");
+            }
+            getImages({ tags, page });
           }}
         >
           Search
@@ -102,18 +106,20 @@ const Search = () => {
         </Row>
         <Button
           variant="primary"
+          className="me-1"
           onClick={() => {
             setPage(page - 1);
-            searchTags({ tags, page: page - 1 });
+            getImages({ tags, page: page - 1 });
           }}
         >
           Previous Page
         </Button>
         <Button
           variant="primary"
+          className="ms-1"
           onClick={() => {
             setPage(page + 1);
-            searchTags({ tags, page: page + 1 });
+            getImages({ tags, page: page + 1 });
           }}
         >
           Next Page

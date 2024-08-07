@@ -8,7 +8,7 @@ const Menubar = () => {
       <Container>
         <Navbar.Brand href="/">AniGram</Navbar.Brand>
         <Nav>
-          <Nav.Link href="/add">New Post</Nav.Link>
+          <Nav.Link href="/search">New Post</Nav.Link>
           <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
         </Nav>
       </Container>
