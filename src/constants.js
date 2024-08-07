@@ -3,5 +3,5 @@ export const API = "https://safebooru.donmai.us/"; // SFW API
 export const POSTS = "posts.json";
 export const POST = "posts/";
 export const TAGS = "tags=";
-export const LIMIT = "limit=10";
+export const LIMIT = "limit=12";
 export const PAGE = "page=";

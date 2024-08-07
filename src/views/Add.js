@@ -37,7 +37,7 @@ const Add = () => {
       title,
       image,
       source: url,
-      poster: user,
+      poster: user.email,
     });
     navigate("/");
   };
@@ -50,6 +50,7 @@ const Add = () => {
       return navigate("/login");
     }
     getImage();
+    console.log(user);
   }, [getImage, loading, navigate, user]);
 
   return (
@@ -73,9 +74,13 @@ const Add = () => {
                     />
                   </Form.Group>
                 </Form>
-                <Row className="justify-content-start">
-                  <Col>Source:</Col>
-                  <Col>{url}</Col>
+                <Row>
+                  <Col className="col-2 text-nowrap fst-italic ms-2">
+                    Source:
+                  </Col>
+                  <Col>
+                    <a href={url}>{url}</a>
+                  </Col>
                 </Row>
                 <Row className="justify-content-end">
                   <Button
