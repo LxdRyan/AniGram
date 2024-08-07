@@ -22,6 +22,7 @@ const Home = () => {
 
   const ImageSquare = ({ post }) => {
     const { image, id } = post;
+    console.log(image);
     return (
       <Link
         to={`post/${id}`}
@@ -32,7 +33,7 @@ const Home = () => {
         }}
       >
         <Image
-          src={image.url}
+          src={image}
           style={{
             objectFit: "cover",
             width: "18rem",
