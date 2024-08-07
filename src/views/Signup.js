@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import axios from "axios";
+import { API, POST, RANDOM } from "../constants";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +12,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const randomPfp = async () => {
+    const response = await axios.get(`${API}${POST}${RANDOM}`);
+    return response.data.preview_file_url;
+  };
 
   return (
     <Container>
@@ -92,9 +99,12 @@ const SignUp = () => {
                       displayName: username,
                     });
                   }
-                  // console.log(
-                  //   `User: ${auth.currentUser.displayName} created\nEmail: ${email}`
-                  // );
+                  await updateProfile(auth.currentUser, {
+                    photoURL: await randomPfp(),
+                  });
+                  console.log(
+                    `User:\t${auth.currentUser.displayName} created\nEmail:\t${email}\nProfile Image:\t${auth.currentUser.photoURL}`
+                  );
                   navigate("/");
                 } catch (error) {
                   setError(error.message);

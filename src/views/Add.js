@@ -37,7 +37,7 @@ const Add = () => {
       title,
       image,
       source: url,
-      poster: user.email,
+      posteruid: user.uid,
     });
     navigate("/");
   };
