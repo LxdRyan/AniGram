@@ -15,6 +15,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const randomPfp = async () => {
+    console.log("askfljhfdkfh");
     const response = await axios.get(`${API}${POST}${RANDOM}`);
     return response.data.preview_file_url;
   };

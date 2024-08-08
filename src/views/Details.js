@@ -12,6 +12,7 @@ const Details = () => {
   const { id } = params;
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [isOwner, setIsOwner] = useState(false);
   const [source, setSource] = useState("");
   const [poster, setPoster] = useState({});
   const [posteruid, setPosterUid] = useState("");
@@ -28,20 +29,20 @@ const Details = () => {
     setImage(post.image);
     setSource(post.source);
     setPosterUid(post.posteruid);
+    setIsOwner(post.posteruid === user.uid);
     getPoster(post.posteruid);
   };
 
   const getPoster = async (id) => {
     const poster = (await getDoc(doc(db, "users", id))).data();
     const { uid, username, photo } = poster;
-    console.log(uid);
+    // console.log(uid);
     setPoster({ uid, username, photo });
   };
 
   const ShowDelete = () => {
-    console.log(user.uid);
-    console.log(posteruid);
-    if (posteruid === user.uid) {
+    console.log(isOwner);
+    if (isOwner) {
       return (
         <Button onClick={() => deletePost()} variant="" className="col-1 p-0">
           <svg
@@ -109,6 +110,27 @@ const Details = () => {
                 </Row>
                 <Row className="justify-content-end">
                   <ShowDelete />
+                  <Button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        // `${user.displayName} is sharing "${title}" from AniGram\n${image}`
+                        `${user.displayName} is sharing "${title}" from AniGram\n${source}`
+                      );
+                    }}
+                    variant=""
+                    className="col-1 p-0"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="green"
+                      class="bi bi-share-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5" />
+                    </svg>
+                  </Button>
                   {/* <Button
                     onClick={() => deletePost()}
                     variant=""

@@ -134,7 +134,7 @@ const Search = () => {
               <Col className="col-11">
                 <Form.Control
                   type="text"
-                  placeholder="e.g. (White hair; 1girl)"
+                  placeholder="e.g. White hair; 1girl"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
