@@ -2,7 +2,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { API, POST, RANDOM } from "../constants";
 
@@ -16,6 +17,14 @@ const SignUp = () => {
   const randomPfp = async () => {
     const response = await axios.get(`${API}${POST}${RANDOM}`);
     return response.data.preview_file_url;
+  };
+
+  const addUser = async () => {
+    await setDoc(doc(db, "users", auth.currentUser.uid), {
+      email: auth.currentUser.email,
+      username: auth.currentUser.displayName,
+      photo: auth.currentUser.photoURL,
+    });
   };
 
   return (
@@ -102,6 +111,7 @@ const SignUp = () => {
                   await updateProfile(auth.currentUser, {
                     photoURL: await randomPfp(),
                   });
+                  addUser();
                   console.log(
                     `User:\t${auth.currentUser.displayName} created\nEmail:\t${email}\nProfile Image:\t${auth.currentUser.photoURL}`
                   );

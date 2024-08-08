@@ -27,9 +27,9 @@ const Menubar = () => {
               style={{
                 height: "2rem",
                 width: "2rem",
-                borderRadius: "50%",
                 objectFit: "cover",
               }}
+              roundedCircle
             />
           </Nav.Link>
         </>

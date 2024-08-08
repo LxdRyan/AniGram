@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
-import { API, POSTS, POST, TAGS, LIMIT, PAGE } from "../constants";
+import { API, POSTS, TAGS, LIMIT, PAGE } from "../constants";
 import Menubar from "../components/Menubar";
 
 const Search = () => {
@@ -13,7 +13,7 @@ const Search = () => {
   const [tags, setTags] = useState("");
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
-  const [mode, setMode] = useState("tags");
+  // const [mode, setMode] = useState("tags");
   // const [placeholder, setPlaceholder] = useState("");
   // const [formtext, setFormtext] = useState("");
   const navigate = useNavigate();

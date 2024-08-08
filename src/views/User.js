@@ -1,16 +1,32 @@
 import { useEffect, useState } from "react";
-import { Container, Image, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Col, Container, Image, Row } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import Menubar from "../components/Menubar";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [showuser, setShowUser] = useState({});
+  const params = useParams();
+  const { id } = params;
+
+  const getUser = async () => {
+    const user = (await getDoc(doc(db, "users", id))).data();
+    setShowUser(user);
+  };
 
   const getPosts = async () => {
-    const query = await getDocs(collection(db, "posts"));
-    const posts = query.docs.map((doc) => {
+    const q = query(collection(db, "posts"), where("posteruid", "==", id));
+    const querySnapshot = await getDocs(q);
+    const posts = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
     setPosts(posts);
@@ -18,7 +34,8 @@ const Home = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+    getUser();
+  });
 
   const ImageSquare = ({ post }) => {
     const { image, id } = post;
@@ -52,6 +69,20 @@ const Home = () => {
     <>
       <Menubar />
       <Container>
+        <Row className="pt-2">
+          <Col className="col-1">
+            <Image
+              src={showuser.photo}
+              style={{ height: "5rem", width: "5rem", objectFit: "cover" }}
+              roundedCircle
+              className="p-0"
+            />
+          </Col>
+          <Col>
+            <h1 className="pt-3">{showuser.username}</h1>
+          </Col>
+        </Row>
+
         <Row>
           <ImagesRow />
         </Row>
