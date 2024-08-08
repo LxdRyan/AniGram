@@ -1,9 +1,12 @@
 # AniGram
 - [AniGram](#anigram)
+	- [Try](#try)
 	- [About](#about)
 	- [How](#how)
 	- [Who](#who)
 	- [Requirements](#requirements)
+## Try
+- [GitHub Repo](https://github.com/LxdRyan/AniGram/)
 ## About
 The name is a portmanteau of *Anime* and *Instagram*. This app is to have dual-functions as both an image finder and social media platform allowing users to share the images they have found (from the platform). The app will be like Instagram for Anime-style-art enjoyers.
 ## How
