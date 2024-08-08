@@ -22,7 +22,7 @@ const Home = () => {
 
   const ImageSquare = ({ post }) => {
     const { image, id } = post;
-    console.log(image);
+    // console.log(image);
     return (
       <Link
         to={`post/${id}`}

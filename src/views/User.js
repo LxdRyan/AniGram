@@ -35,14 +35,14 @@ const Home = () => {
   useEffect(() => {
     getPosts();
     getUser();
-  });
+  }, []);
 
   const ImageSquare = ({ post }) => {
     const { image, id } = post;
     console.log(image);
     return (
       <Link
-        to={`post/${id}`}
+        to={`../post/${id}`}
         style={{
           width: "18rem",
           marginLeft: "1rem",

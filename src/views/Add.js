@@ -49,6 +49,7 @@ const Add = () => {
       return navigate("/login");
     }
     getImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, navigate, user]);
 
   return (
