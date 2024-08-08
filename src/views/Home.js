@@ -1,8 +1,8 @@
-import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import Menubar from "../components/Menubar";
 
 const Home = () => {
